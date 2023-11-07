@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4578408239466935427}
   - component: {fileID: 3486878862237118860}
   m_Layer: 0
-  m_Name: SpawnPoint_4
+  m_Name: SpawnPoint_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCoordinates: {fileID: 7394006053121470266}
+  spawnManager: {fileID: 0}
 --- !u!65 &3486878862237118860
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ PrefabInstance:
     - target: {fileID: 1697608826385523232, guid: a7a8c8c4c3033ab419b304ddeee1898d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -73
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1697608826385523232, guid: a7a8c8c4c3033ab419b304ddeee1898d,
         type: 3}
@@ -289,7 +290,7 @@ PrefabInstance:
     - target: {fileID: 4232589109732468567, guid: 91e76213afd5e3e4080603ea341938ea,
         type: 3}
       propertyPath: m_Name
-      value: CoinObject_4lvl
+      value: CoinObject_2lvl
       objectReference: {fileID: 0}
     - target: {fileID: 4232589109732468567, guid: 91e76213afd5e3e4080603ea341938ea,
         type: 3}

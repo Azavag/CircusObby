@@ -6,7 +6,7 @@ using UnityEngine;
 public class InputGame : MonoBehaviour
 {
     [SerializeField] JoystickInput joystickInput;
-  
+
     public void ShowCursorState(bool state)
     {
         if (joystickInput.isJoystickMobile())

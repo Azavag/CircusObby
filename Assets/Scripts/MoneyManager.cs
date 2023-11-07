@@ -25,22 +25,21 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] InputGame inputGame;
     [SerializeField] HardLevelsNavigation levelsNavigation;
     SoundController soundController;
-    private void Awake()
+
+    void Start()
     {
         soundController = FindObjectOfType<SoundController>();
-        if (Language.isRusLang)
+        if (Language.Instance.currentLanguage == "ru")
         {
             continueGameText = ruContinueText;
             newGameText = ruNewGameText;
-        } 
+        }
         else
         {
             continueGameText = enContinueText;
             newGameText = enNewGameText;
         }
-    }
-    void Start()
-    {
+
         runsCount = Progress.Instance.playerInfo.runsCount;
         moneyCount = Progress.Instance.playerInfo.moneyCount;
         maxMoneyCount = runsCount * moneyOnRun;

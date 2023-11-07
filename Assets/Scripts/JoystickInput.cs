@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.AudioSettings;
 
 
 public class JoystickInput:MonoBehaviour
@@ -12,16 +11,16 @@ public class JoystickInput:MonoBehaviour
     [SerializeField] SimpleCharacterController simpleCharacterController;
     [SerializeField] Transform cameraTransform;
     [SerializeField] Transform playerTransform;
-    YandexSDK yandexSDK;
+    [SerializeField] YandexSDK yandexSDK;
     [SerializeField] bool isMobile;
     [SerializeField] GameObject mobileControl;
 
     Vector3 movementVector;
     float x, y;
+
     private void Start()
-    {
-        yandexSDK = FindObjectOfType<YandexSDK>();
-        yandexSDK.GetDeviceInfo();              
+    {       
+        yandexSDK.GetDeviceInfo();
     }
 
     public void OnJumpButton()

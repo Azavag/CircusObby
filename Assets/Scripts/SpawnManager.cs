@@ -71,7 +71,7 @@ public class SpawnManager : MonoBehaviour
         BlockInput();
         deathAlert.SetActive(true);
         deathAlertanimator.SetBool("isDeath", true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.6f);
         deathMenu.SetActive(true);
         advManager.ShowAdv();
     }

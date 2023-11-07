@@ -25,7 +25,12 @@ public class BuySkinButtonController : MonoBehaviour
 
     private void Awake()
     {
-        if(Language.isRusLang) 
+        buttonText = GetComponentInChildren<TextMeshProUGUI>();
+        animator = GetComponent<Animator>();
+    }
+    void Start()
+    {      
+        if (Language.Instance.currentLanguage == "ru")
         {
             advText = ruAdvText;
             rateText = ruRateText;
@@ -35,11 +40,6 @@ public class BuySkinButtonController : MonoBehaviour
             advText = enAdvText;
             rateText = enRateText;
         }
-    }
-    void Start()
-    {
-        buttonText = GetComponentInChildren<TextMeshProUGUI>();
-        animator = GetComponent<Animator>();
     }
 
     public void ShowInfo(ShopObjectController shopObj)

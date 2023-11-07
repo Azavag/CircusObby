@@ -26,23 +26,27 @@ public class Progress : MonoBehaviour
 {
     public PlayerInfo playerInfo;
     public static Progress Instance;
-    YandexSDK yandexSDK;
+    [SerializeField] YandexSDK yandexSDK;
    
     private void Awake()
     {
-        yandexSDK = FindObjectOfType<YandexSDK>();
         if (Instance == null)
         {
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            Debug.Log("Progress");
             yandexSDK.Load();
-            
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+       
     }
 
 }

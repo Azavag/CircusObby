@@ -17,24 +17,23 @@ public class Link : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            transform.SetParent(null);
-            DontDestroyOnLoad(this);
-
-#if !UNITY_EDITOR 
-            GetDomainExtern();
-#endif
+           // transform.SetParent(null);
+            //DontDestroyOnLoad(this);
         }
         else Destroy(gameObject);
     }
 
-    //Из jslib
-    public void SetDomain(string domainString)
+    private void Start()
     {
-        currentDomain = domainString;       
     }
+
     //По кнопке
     public void GotoDeveloperPage()
     {
+        Debug.Log("Domain");
+#if !UNITY_EDITOR
+            currentDomain = GetDomainExtern();
+#endif
         link = string.Format("https://yandex.{0}/games/developer?name=DemiGames", currentDomain);
         Application.OpenURL(link);
     }

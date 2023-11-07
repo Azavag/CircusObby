@@ -123,20 +123,21 @@ public class ShopChooseController : MonoBehaviour
             case typeOfSkin.shirt:
                 tempIndex = Array.IndexOf(shirtColorsArray, shopObject);
                 Progress.Instance.playerInfo.colorsShirtBuyState[tempIndex] = shopObject.isBuy;
-                YandexSDK.Save();
+                //YandexSDK.Save();
                 break;
             case typeOfSkin.pants:
                 tempIndex = Array.IndexOf(pantsColorsArray, shopObject);
                 Progress.Instance.playerInfo.colorsPantsBuyState[tempIndex] = shopObject.isBuy;
-                YandexSDK.Save();
+                //YandexSDK.Save();
                 break;
             case typeOfSkin.special:
                 tempIndex = Array.IndexOf(specialSkinsNamesArray, shopObject);
                 Progress.Instance.playerInfo.specialsBuyState[tempIndex] = shopObject.isBuy;
-                YandexSDK.Save();
+                //YandexSDK.Save();
                 break;
+                
         }
-
+        YandexSDK.Save();
         shopObject.ShowLockImage(false);
     }
 

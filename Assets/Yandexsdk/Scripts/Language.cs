@@ -7,27 +7,33 @@ public class Language : MonoBehaviour
 {
     public string currentLanguage;
     public static Language Instance;
-    static public bool isRusLang;
+    public bool isRusLang;
     
     [DllImport("__Internal")]
     private static extern string GetLang();
   
     private void Awake()
     {
+       
         if (Instance == null)
         {
             Instance = this;
-            transform.SetParent(null);
-            DontDestroyOnLoad(this);
-            
+            //transform.SetParent(null);
+            //DontDestroyOnLoad(this);
+            Debug.Log("Language");
 #if !UNITY_EDITOR
             currentLanguage = GetLang();          
 #endif
-            if (currentLanguage == "ru")
-                isRusLang = true;
-            else isRusLang = false;
         }
         else
             Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        
+        if (currentLanguage == "ru")
+            isRusLang = true;
+        else isRusLang = false;
     }
 }

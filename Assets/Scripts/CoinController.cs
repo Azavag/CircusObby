@@ -9,13 +9,19 @@ public class CoinController : MonoBehaviour
     [SerializeField] GameObject coinObject;
     public bool isCoinCollect;               //для сохранения
     ParticleSystem particles;
-    SoundController soundController;
+    [SerializeField] SoundController soundController;
     CoinsCollectionController coinsCollectionController;
     private void Awake()
     {
-        moneyManager = FindObjectOfType<MoneyManager>();
+       
         particles = GetComponentInChildren<ParticleSystem>();
+       
+    }
+
+    private void Start()
+    {
         soundController = FindObjectOfType<SoundController>();
+        moneyManager = FindObjectOfType<MoneyManager>();
         coinsCollectionController = FindObjectOfType<CoinsCollectionController>();
     }
 

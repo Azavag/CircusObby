@@ -99,9 +99,6 @@ public class NavigationController : MonoBehaviour
         shopCamera.gameObject.SetActive(isShop);
         shopCanvas.SetActive(isShop);
         prevPageObject.SetActive(!isShop);
-        //Реклама
-        if (isShop)                 
-            advManager.ShowAdv();
     }
     public void ShowSettingMenu()
     {

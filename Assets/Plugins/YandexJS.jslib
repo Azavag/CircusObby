@@ -19,7 +19,8 @@ RateGameExtern: function () {
                         {
                           myGameInstance.SendMessage('ShopChooseController', 'SetRewardingState');                         
                           myGameInstance.SendMessage('ShopChooseController', 'UnlockRewardSkin');
-                        }                  
+                        }   
+                                       
                     })
             } 
             else {
@@ -55,26 +56,35 @@ RateGameExtern: function () {
 	SaveExtern: function(date) {
     if(player){
       var dateString = UTF8ToString(date);
-    var myobj = JSON.parse(dateString);
-    player.setData(myobj);
+      var myobj = JSON.parse(dateString);
+      player.setData(myobj);
+      
     }
     },
 
   LoadExtern: function(){
     if(player){
       player.getData().then(_date => {
+      console.log("Data is getting");
       console.log(_date);
       const myJSON = JSON.stringify(_date);
-      myGameInstance.SendMessage('YandexSDK', 'SetPlayerInfo', myJSON);
-      console.log("Data is getting");
+      myGameInstance.SendMessage('YandexSDK', 'SetPlayerInfo', myJSON);      
+      myGameInstance.SendMessage('Loader', 'LoadGame');
     });
-    }
-    
+    }   
   },
+
+  CheckSdkReady: function()
+  {
+    if(sdkReady)
+      myGameInstance.SendMessage('SceneLoader', 'SwitchScene'); 
+  },
+
   //Страничная реклама
   ShowIntersitialAdvExtern: function(){
     ysdk.adv.showFullscreenAdv({
       callbacks: {
+        
          onOpen: () => {
           myGameInstance.SendMessage("SoundController", "MuteGame");         
           console.log('Adv open.');
@@ -154,8 +164,20 @@ RateGameExtern: function () {
         myGameInstance.SendMessage('LeaderboardController', 'OpenAuthAlert');  
     },
 
-  
+    GetDevice : function()
+    {
+      var deviceData = ysdk.deviceInfo.type;   
+      myGameInstance.SendMessage('YandexSDK', 'SetDeviceInfo', deviceData);
+    },
 
+    GetDomainExtern : function()
+    {
+      var domain = ysdk.environment.i18n.tld;   
+      var bufferSize = lengthBytesUTF8(domain) + 1;
+      var buffer = _malloc(bufferSize);
+      stringToUTF8(domain, buffer, bufferSize);
+      return buffer;
+    },
     GetLang : function()
     {
       var lang = ysdk.environment.i18n.lang;
@@ -163,17 +185,5 @@ RateGameExtern: function () {
       var buffer = _malloc(bufferSize);
       stringToUTF8(lang, buffer, bufferSize);
       return buffer;
-    },
-
-    GetDevice : function()
-    {
-      var deviceData = ysdk.deviceInfo.type;   
-      myGameInstance.SendMessage('YandexSDK', 'SetDeviceInfo', deviceData);
-    },
-
-     GetDomainExtern : function()
-    {
-      var deviceData = ysdk.environment.i18n.tld;   
-      myGameInstance.SendMessage('Link', 'SetDomain', domainData);
     },
   });
