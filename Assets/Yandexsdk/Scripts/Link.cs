@@ -4,8 +4,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Link : MonoBehaviour
-{
-   
+{  
     public static Link Instance;
     public string currentDomain;
     string link = "";
@@ -30,7 +29,6 @@ public class Link : MonoBehaviour
     //По кнопке
     public void GotoDeveloperPage()
     {
-        Debug.Log("Domain");
 #if !UNITY_EDITOR
             currentDomain = GetDomainExtern();
 #endif

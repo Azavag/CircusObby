@@ -35,7 +35,6 @@ public class Progress : MonoBehaviour
             transform.parent = null;
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            Debug.Log("Progress");
             yandexSDK.Load();
         }
         else

@@ -64,12 +64,15 @@ RateGameExtern: function () {
 
   LoadExtern: function(){
     if(player){
-      player.getData().then(_date => {
-      console.log("Data is getting");
-      console.log(_date);
-      const myJSON = JSON.stringify(_date);
-      myGameInstance.SendMessage('YandexSDK', 'SetPlayerInfo', myJSON);      
-      myGameInstance.SendMessage('Loader', 'LoadGame');
+      player.getData().then(_data => {
+      // console.log("Data is getting");
+      // console.log(_data);
+      const myJSON = JSON.stringify(_data);
+      myGameInstance.SendMessage('YandexSDK', 'SetPlayerInfo', myJSON);   
+      while(myJSON == null)
+        console.log('null');
+           
+       myGameInstance.SendMessage('Loader', 'LoadGame');
     });
     }   
   },
@@ -83,8 +86,7 @@ RateGameExtern: function () {
   //Страничная реклама
   ShowIntersitialAdvExtern: function(){
     ysdk.adv.showFullscreenAdv({
-      callbacks: {
-        
+      callbacks: {       
          onOpen: () => {
           myGameInstance.SendMessage("SoundController", "MuteGame");         
           console.log('Adv open.');

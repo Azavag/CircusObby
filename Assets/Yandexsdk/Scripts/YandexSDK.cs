@@ -54,22 +54,17 @@ public class YandexSDK : MonoBehaviour
     private void Awake()
     {
         //LeaderBoardReady += SetJSONEntries;
-        Debug.Log("YandexSDK");
         transform.SetParent(null);
-        DontDestroyOnLoad(this);
-        
+        DontDestroyOnLoad(this);       
     }
 
     void Start()
     {
-        // leaderboard = FindObjectOfType<LeaderboardController>();
-        
-
+        // leaderboard = FindObjectOfType<LeaderboardController>();       
     }
     //Вызывается месте сохранения Save -> SaveExtern в jslib
     static public void Save()
     {
-        Debug.Log("Save");
         string jsonString = JsonUtility.ToJson(Progress.Instance.playerInfo);
 #if !UNITY_EDITOR
         SaveExtern(jsonString);
@@ -78,7 +73,6 @@ public class YandexSDK : MonoBehaviour
     //Вызывается в месте загрузки Load -> LoadExtern -> SetPlayerInfo
     public void Load()
     {
-        Debug.Log("Load");
 #if !UNITY_EDITOR
         LoadExtern();     
 #endif
@@ -179,7 +173,6 @@ public class YandexSDK : MonoBehaviour
     public void SetDeviceInfo(string deviceString)
     {
         deviceType = deviceString;
-        Debug.Log(deviceType);
     }
     public string GetDeviceType()
     {
