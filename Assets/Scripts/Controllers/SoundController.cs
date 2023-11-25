@@ -15,7 +15,6 @@ public class SoundController : MonoBehaviour
     float effectsVolume, musicVolume;
     [Header("All sounds")]  
     [SerializeField] Sound[] sounds;
-    AudioSource m_AudioSource;
     private void Awake()
     {
         transform.SetParent(null);
@@ -42,7 +41,6 @@ public class SoundController : MonoBehaviour
 
     void Start()
     {
-        m_AudioSource = GetComponent<AudioSource>();
         effectsSlider.value = Progress.Instance.playerInfo.effectsVolume;
         musicSlider.value = Progress.Instance.playerInfo.musicVolume;
     }
@@ -68,13 +66,13 @@ public class SoundController : MonoBehaviour
     {      
         mixer.SetFloat("EffectsVolume", Mathf.Log10(effectsSlider.value) * 20);
         effectsVolume = effectsSlider.value;
-        Progress.Instance.playerInfo.effectsVolume = effectsSlider.value;
+        Progress.Instance.playerInfo.effectsVolume = effectsVolume;
     }
     public void SetMusicLevel()
     {
         mixer.SetFloat("MusicVolume", Mathf.Log10(musicSlider.value) * 20);
         musicVolume = musicSlider.value;
-        Progress.Instance.playerInfo.musicVolume = musicSlider.value;
+        Progress.Instance.playerInfo.musicVolume = musicVolume;
     }
     //По кнопке Закрыть
     public void SaveVolumeSetting()

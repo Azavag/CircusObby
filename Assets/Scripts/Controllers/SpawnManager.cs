@@ -41,7 +41,6 @@ public class SpawnManager : MonoBehaviour
             navigationController.ShowLevelsNavHint(true);
         }
         Progress.Instance.playerInfo.spawnPointNumber = lastSpawnPoint;
-        YandexSDK.Save();
     }
     public void UpdatePointNumber(int pointNumber)
     {

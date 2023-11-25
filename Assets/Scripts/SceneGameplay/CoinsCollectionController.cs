@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class CoinsCollectionController : MonoBehaviour
 {   
-    [SerializeField] CoinController[] coinControllers = new CoinController[68];
-    // Start is called before the first frame update
+    [SerializeField] CoinController[] coinControllers = new CoinController[63];
     void Start()
     {
         int tempCounter = 0;

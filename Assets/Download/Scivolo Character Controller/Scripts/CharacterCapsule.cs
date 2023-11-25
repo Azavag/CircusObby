@@ -178,8 +178,8 @@ namespace MenteBacata.ScivoloCharacterController
         private void Awake()
         {
             DoPreliminaryCheck();
+            rb = GetComponent<Rigidbody>();
             InstantiateComponents();
-
             collisionMask = gameObject.GetCollisionMask();
         }
 
@@ -273,7 +273,7 @@ namespace MenteBacata.ScivoloCharacterController
             capsuleCollider = gameObject.AddComponent<CapsuleCollider>();
             SetColliderProperties();
 
-            rb = gameObject.AddComponent<Rigidbody>();
+            //rb = gameObject.AddComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.freezeRotation = true;
             rb.mass = 5;

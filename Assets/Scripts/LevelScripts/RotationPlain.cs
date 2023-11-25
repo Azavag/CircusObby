@@ -17,7 +17,7 @@ public class RotationPlain : MonoBehaviour
     private void FixedUpdate()
     {
         // Применяем момент вращения к Rigidbody.
-        rb.AddTorque(rotationAxis * rotationForce, ForceMode.Force);
+        rb.AddRelativeTorque(rotationAxis * rotationForce, ForceMode.Force);
     }
 }
 

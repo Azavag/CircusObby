@@ -7,14 +7,12 @@ public class BallReturn : MonoBehaviour
 {
     [SerializeField] Transform kickPoint;
     [SerializeField] GameObject ballObject;
-    [SerializeField] GameObject coinObject;
     bool isAlreadyRewarded;
     [SerializeField] GameObject playerObject;
     SoundController soundController;
     void Start()
     {
         soundController = FindObjectOfType<SoundController>();
-        coinObject.SetActive(false);
     }
 
 
@@ -28,7 +26,6 @@ public class BallReturn : MonoBehaviour
             if (!isAlreadyRewarded)
             {
                 soundController.Play("Success");
-                coinObject.SetActive(true);
                 isAlreadyRewarded = true;
             }
             StartCoroutine(BallReturning());

@@ -5,11 +5,14 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     bool isSpawnAlreadySet;
-    [SerializeField] public Transform spawnCoordinates;
     SpawnManager spawnManager;
+    SoundController soundController;
+    [SerializeField] public Transform spawnCoordinates;
+    [SerializeField] ParticleSystem spawnParticles;
     private void Awake()
     {
         spawnManager = FindObjectOfType<SpawnManager>();
+        soundController = FindObjectOfType<SoundController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,6 +22,8 @@ public class SpawnPoint : MonoBehaviour
         AlreadySet(true);
         spawnManager.UpdatePointNumber(this);
         spawnManager.SaveSpawnpointState(this);
+        soundController.Play("Success");
+        spawnParticles.Play();
     }
 
     public void AlreadySet(bool state)
