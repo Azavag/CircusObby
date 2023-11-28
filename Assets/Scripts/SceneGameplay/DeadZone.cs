@@ -10,7 +10,7 @@ public class DeadZone : MonoBehaviour
     void Start()
     {
         spawnManager = FindObjectOfType<SpawnManager>();
-        soundController = FindObjectOfType<SoundController>();
+        
     }
 
 
