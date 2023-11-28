@@ -6,6 +6,13 @@ using UnityEngine;
 [Serializable]
 public class CharacterStand : MonoBehaviour
 {
-    public string name;
+    public string characterName;
     public float xPosition;
+    public bool isChoosed;
+    public Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 }

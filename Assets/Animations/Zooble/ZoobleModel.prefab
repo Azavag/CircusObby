@@ -2335,7 +2335,7 @@ GameObject:
   - component: {fileID: 6880924792426926288}
   - component: {fileID: 6054011190691659088}
   m_Layer: 0
-  m_Name: Zooble
+  m_Name: ZoobleModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2399,7 +2399,7 @@ Animator:
   m_GameObject: {fileID: 4486212835818422700}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2a4f790ee3db0a444949b988e788bd6e, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7a2fc566cd24cb548911c48ce21dd2f9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 47a7619cb5c6f3942898bcb5a6a421ff, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

@@ -32,7 +32,7 @@ public class Link : MonoBehaviour
 #if !UNITY_EDITOR
             currentDomain = GetDomainExtern();
 #endif
-        link = string.Format("https://yandex.{0}/games/developer?name=DemiGames", currentDomain);
+        link = string.Format("https://yandex.{0}/games/developer?characterName=DemiGames", currentDomain);
         Application.OpenURL(link);
     }
 }

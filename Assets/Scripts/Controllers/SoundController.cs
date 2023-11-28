@@ -15,9 +15,36 @@ public class SoundController : MonoBehaviour
     float effectsVolume, musicVolume;
     [Header("All sounds")]  
     [SerializeField] Sound[] sounds;
+
+    public static SoundController instance;
     private void Awake()
     {
-        transform.SetParent(null);
+        if (instance == null)
+        {
+            instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(transform);
+        }
+        else Destroy(gameObject);
+
+        //if (instance == null)
+        //{
+        //    //First run, set the instance
+        //    instance = this;
+        //    transform.SetParent(null);
+        //    DontDestroyOnLoad(gameObject);
+
+        //}
+        //else if (instance != this)
+        //{
+        //    //Instance is not the same as the one we have, destroy old one, and reset to newest one
+        //    Destroy(instance.gameObject);
+        //    instance = this;
+        //    transform.SetParent(null);
+        //    DontDestroyOnLoad(gameObject);
+        //}
+
+
         foreach (Sound s in sounds)
         {                 
             s.audioSource = gameObject.AddComponent<AudioSource>();
@@ -36,11 +63,13 @@ public class SoundController : MonoBehaviour
                     break;
             }
         }
-        Play("Background");
+        
     }
 
     void Start()
     {
+        //effectsSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
+        Play("Background");
         effectsSlider.value = Progress.Instance.playerInfo.effectsVolume;
         musicSlider.value = Progress.Instance.playerInfo.musicVolume;
     }

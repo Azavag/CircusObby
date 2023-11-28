@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using SimpleJSON;
-using UnityEngine.Rendering;
 
 public class YandexSDK : MonoBehaviour
 { 
@@ -51,11 +50,18 @@ public class YandexSDK : MonoBehaviour
     bool isDataGetting;
     string deviceType;
     public string domainType;
+
+    public static YandexSDK instance;
     private void Awake()
     {
         //LeaderBoardReady += SetJSONEntries;
-        transform.SetParent(null);
-        DontDestroyOnLoad(this);       
+        if (instance == null)
+        {
+            instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(transform);
+        }
+        else Destroy(gameObject);    
     }
 
     void Start()

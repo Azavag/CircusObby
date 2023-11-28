@@ -1,8 +1,8 @@
 using MenteBacata.ScivoloCharacterControllerDemo;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NavigationController : MonoBehaviour
 {
@@ -11,12 +11,12 @@ public class NavigationController : MonoBehaviour
     [SerializeField] GameObject shopCanvas;
     [SerializeField] GameObject startCanvas;
     [SerializeField] GameObject alertCanvas;
+    [SerializeField] GameObject settingsCanvas;
     [SerializeField] Camera mainCamera;
     [SerializeField] Camera shopCamera;
     [SerializeField] GameObject playerObject;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
-    [SerializeField] GameObject settingsCanvas;
     GameObject prevPageObject;
     [SerializeField] SpawnManager spawnManager;
     [SerializeField] AdvManager advManager;
@@ -28,11 +28,13 @@ public class NavigationController : MonoBehaviour
     bool isSettings;
     bool isGame;
 
-    SoundController soundController;
+    [SerializeField] SoundController soundController;
+    [SerializeField] SwapCharacterModel swapCharacter;
 
     private void Awake()
     {
         soundController = FindObjectOfType<SoundController>();
+        settingsCanvas = soundController.transform.GetChild(0).gameObject;
     }
     void Start()
     {
@@ -40,14 +42,14 @@ public class NavigationController : MonoBehaviour
         ingameCanvas.SetActive(false);
         alertCanvas.SetActive(false);
         shopCanvas.SetActive(isShop);
-        settingsCanvas.SetActive(isSettings);
+        settingsCanvas.SetActive(false);
         EnableCharacterControl(isGame);
         deathMenu.SetActive(isGame);
         pauseMenu.SetActive(isPause);
         pauseButton.SetActive(!isPause);
         levelsNavAlert.SetActive(false);
         levelsNavPanel.SetActive(false);
-        shopCamera.gameObject.SetActive(isShop);                 
+        shopCamera.gameObject.SetActive(isShop);
     }
 
     // Update is called once per frame
@@ -66,8 +68,10 @@ public class NavigationController : MonoBehaviour
     {
         isGame = !isGame;
         if (isGame)
-            //spawnManager.RespawnPlayer();
+            spawnManager.RespawnPlayer();
+
         inputGame.ShowCursorState(!isGame);
+        swapCharacter.MakeCurrentCharacterModelActive();
         EnableCharacterControl(isGame);
         isPause = false;
         pauseMenu.SetActive(isPause);
@@ -75,6 +79,11 @@ public class NavigationController : MonoBehaviour
         deathMenu.SetActive(false);
         startCanvas.SetActive(!isGame);
         ingameCanvas.SetActive(isGame);
+    }
+
+    public void ShowGamemodeChoosing()
+    {
+
     }
     public void ShowPauseMenu()
     {
@@ -100,6 +109,12 @@ public class NavigationController : MonoBehaviour
         shopCanvas.SetActive(isShop);
         prevPageObject.SetActive(!isShop);
     }
+
+    public void ShowCharactersSwapScene()
+    {
+        SceneManager.LoadScene("SwapHeroesScene");
+    }
+
     public void ShowSettingMenu()
     {
         isSettings = !isSettings;

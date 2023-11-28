@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class CharacterSwapper : MonoBehaviour
 {
@@ -19,8 +19,10 @@ public class CharacterSwapper : MonoBehaviour
     [Header("Кнопки")]
     [SerializeField] GameObject leftButton;
     [SerializeField] GameObject rightButton;
+    [SerializeField] Button choosingButton;
     bool isOnRightBorder;
     bool isOnLeftBorder;
+    [SerializeField] GameObject choosenCharacterLight;
     void Start()
     {
         characters = new CharacterStand[charactersTransform.childCount];
@@ -30,39 +32,46 @@ public class CharacterSwapper : MonoBehaviour
             characters[counter] = character.GetComponent<CharacterStand>();
             counter++;
         }
+        if(Progress.Instance != null)
+            currentCharacterNumber = Progress.Instance.playerInfo.choosenCharacterNumber;
+        SetChoosedStateToCharacter();
         MoveCharactersPool(0);
         ScaleCurrentCharacter(0);
-        SwapButtonsVisibility();
+        ChangeSlideButtonsVisibility();
     }
 
     public void LeftHeroSlide()
     {
         if (CheckNumberOnMinBorder(currentCharacterNumber) || !canSwap)
             return;
-
-        canSwap = false;
-        characterNameText.text = "";
-        UnscaleCurrentCharacter();
+        SwipeOut();
         currentCharacterNumber--;
-        MoveCharactersPool(slideTime);        
-        ScaleCurrentCharacter(slideTime);
-        SwapButtonsVisibility();
+        SwipeIn();
     }
     public void RightHeroSlide()
     {
         if (CheckNumberOnMaxBorder(currentCharacterNumber) || !canSwap)
             return;
-
+        SwipeOut();
+        currentCharacterNumber++;
+        SwipeIn();  
+    }
+    bool SwipeOut()
+    {     
         canSwap = false;
         characterNameText.text = "";
+        choosenCharacterLight.SetActive(false);
         UnscaleCurrentCharacter();
-        currentCharacterNumber++;
+        return true;
+    }
+    void SwipeIn()
+    {
+        CheckChoosingButtons();
         MoveCharactersPool(slideTime);
         ScaleCurrentCharacter(slideTime);
-        SwapButtonsVisibility();
+        ChangeSlideButtonsVisibility();
     }
-
-    void SwapButtonsVisibility()
+    void ChangeSlideButtonsVisibility()
     {
         if (isOnLeftBorder)
         {
@@ -85,7 +94,6 @@ public class CharacterSwapper : MonoBehaviour
             SwitchSliderButton(leftButton, false);
         }
     }
-
     void MoveCharactersPool(float animTime)
     {
         charactersTransform.
@@ -97,11 +105,16 @@ public class CharacterSwapper : MonoBehaviour
         currentCharacterTransform.
             LeanScale(scaleMultiplier * currentCharacterTransform.localScale, animTime).setOnComplete(OnSlideEnd);
     }
-
     void OnSlideEnd()
     {
-        characterNameText.text = characters[currentCharacterNumber].name;
+        characterNameText.text = characters[currentCharacterNumber].characterName;
+        LightOn();
         canSwap = true;
+    }
+    public void LightOn()
+    {
+        if (isCurrentCharacterChoosed())
+            choosenCharacterLight.SetActive(true);
     }
     void UnscaleCurrentCharacter()
     {
@@ -119,5 +132,38 @@ public class CharacterSwapper : MonoBehaviour
     void SwitchSliderButton(GameObject buttonObject, bool state)
     {
         buttonObject.SetActive(state);
+    }  
+    public bool isCurrentCharacterChoosed()
+    {
+        return characters[currentCharacterNumber].isChoosed;
+    }
+    public void SetChoosedStateToCharacter()
+    {
+        foreach (var character in characters)
+            character.isChoosed = false;
+        characters[currentCharacterNumber].isChoosed = true;
+        LightOn();
+        PlayChoosingAnimation();
+        CheckChoosingButtons();
+    }
+
+    void PlayChoosingAnimation()
+    {
+        characters[currentCharacterNumber].animator.SetTrigger("choosed");
+    }
+
+    public int GetCurrentCharacterNumber()
+    {
+        return currentCharacterNumber;
+    }
+    void CheckChoosingButtons()
+    {
+        if (characters[currentCharacterNumber].isChoosed)
+            choosingButton.gameObject.SetActive(false);
+        else
+        {
+            choosingButton.gameObject.SetActive(true);
+            choosingButton.GetComponentInChildren<TextMeshProUGUI>().text = "Выбрать";
+        }
     }
 }

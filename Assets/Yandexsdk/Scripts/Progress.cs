@@ -19,15 +19,14 @@ public class PlayerInfo
     public string choosedSpecialColor;      //++
     public bool isNavButtonActive;          //++
     public bool[] areSpawnpointsSet = new bool[51];
+    public int choosenCharacterNumber;
 }
-
 
 public class Progress : MonoBehaviour
 {
     public PlayerInfo playerInfo;
     public static Progress Instance;
-    [SerializeField] YandexSDK yandexSDK;
-   
+    [SerializeField] YandexSDK yandexSDK; 
     private void Awake()
     {
         if (Instance == null)
@@ -42,12 +41,6 @@ public class Progress : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Start()
-    {
-       
-    }
-
 }
 
 

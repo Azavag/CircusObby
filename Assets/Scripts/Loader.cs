@@ -6,7 +6,7 @@ public class Loader : MonoBehaviour
 {
     [SerializeField] GameObject controllers, canvases, sdk, level, player, setup;
     [SerializeField] bool inEditor;
-
+    [SerializeField] NavigationController navigationController;
     private void Awake()
     {
         sdk.SetActive(false);
@@ -18,7 +18,6 @@ public class Loader : MonoBehaviour
     }
     private void Start()
     {
-        //sdk.SetActive(true);
 #if UNITY_EDITOR
         LoadGame();
 #endif
@@ -29,7 +28,19 @@ public class Loader : MonoBehaviour
         controllers.SetActive(true);
         canvases.SetActive(true);
         level.SetActive(true);
-        player.SetActive(true);
+        //player.SetActive(true);
         setup.SetActive(true);
+
+        StartCoroutine(StartLevel());
     }
+
+    IEnumerator StartLevel()
+    {
+        yield return new WaitForSeconds(0.7f);
+        if (LevelStartReciever.instance.canRunLevel)
+        {
+            navigationController.ShowGame();
+        }
+    }
+
 }

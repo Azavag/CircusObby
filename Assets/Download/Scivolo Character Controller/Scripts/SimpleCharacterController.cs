@@ -1,4 +1,5 @@
-﻿using MenteBacata.ScivoloCharacterController;
+﻿using Codice.CM.Client.Differences.Merge;
+using MenteBacata.ScivoloCharacterController;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,6 @@ using UnityEngine.UI;
 
 namespace MenteBacata.ScivoloCharacterControllerDemo
 {
-    
     public class SimpleCharacterController : MonoBehaviour
     {      
         public float moveSpeed = 5f;
@@ -52,7 +52,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
         private MovingPlatform movingPlatform;
 
-        Animator animator;
+        public Animator animator;
 
         private Vector3 JoystickVector;
         bool isJoystickJump;
@@ -60,9 +60,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
         private void Start()
         {
             cameraTransform = Camera.main.transform;
-            mover.canClimbSteepSlope = true;
-            animator = GetComponentInChildren<Animator>();
-            
+            mover.canClimbSteepSlope = true;         
         }
 
         private void Update()
@@ -127,7 +125,10 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
             if (isOnMovingPlatform)
                 ApplyPlatformMovement(movingPlatform);
         }
-
+        public void SetCurrentCharacterAnimator()
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
         public void SetJoyStickMovement(Vector3 vector3)
         {
             JoystickVector = vector3;
