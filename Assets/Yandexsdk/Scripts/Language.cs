@@ -18,6 +18,8 @@ public class Language : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
 #if !UNITY_EDITOR
             currentLanguage = GetLang();          
 #endif

@@ -6,53 +6,57 @@ using UnityEngine.SceneManagement;
 
 public class NavigationController : MonoBehaviour
 {
-    [SerializeField] GameObject pauseButton;
+    [Header("Канвасы")]
     [SerializeField] GameObject ingameCanvas;
     [SerializeField] GameObject shopCanvas;
     [SerializeField] GameObject startCanvas;
     [SerializeField] GameObject alertCanvas;
     [SerializeField] GameObject settingsCanvas;
+    [Header("Панели в главном меню")]
+    [SerializeField] GameObject mainPanel;
+    [SerializeField] GameObject gamemmodesPanel;
+
     [SerializeField] Camera mainCamera;
-    [SerializeField] Camera shopCamera;
     [SerializeField] GameObject playerObject;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
+    [SerializeField] GameObject pauseButton;
     GameObject prevPageObject;
     [SerializeField] SpawnManager spawnManager;
     [SerializeField] AdvManager advManager;
     [SerializeField] InputGame inputGame;
-    [SerializeField] GameObject levelsNavAlert;
-    [SerializeField] GameObject levelsNavPanel;
+    [SerializeField] GameObject levelsNavAlert;     //Удалить?
     bool isPause;
-    bool isShop;
     bool isSettings;
     bool isGame;
 
     [SerializeField] SoundController soundController;
     [SerializeField] SwapCharacterModel swapCharacter;
-
+    ChoosingGamemode choosingGamemode;
+    [SerializeField] SpeedRunLevelController speedRunLevelController;
+    LevelLoadAnimator levelLoadAnimator;
     private void Awake()
     {
         soundController = FindObjectOfType<SoundController>();
         settingsCanvas = soundController.transform.GetChild(0).gameObject;
+        choosingGamemode = GetComponent<ChoosingGamemode>();
+        levelLoadAnimator = FindObjectOfType<LevelLoadAnimator>();
     }
     void Start()
     {
         startCanvas.SetActive(true);
         ingameCanvas.SetActive(false);
         alertCanvas.SetActive(false);
-        shopCanvas.SetActive(isShop);
         settingsCanvas.SetActive(false);
         EnableCharacterControl(isGame);
         deathMenu.SetActive(isGame);
         pauseMenu.SetActive(isPause);
         pauseButton.SetActive(!isPause);
         levelsNavAlert.SetActive(false);
-        levelsNavPanel.SetActive(false);
-        shopCamera.gameObject.SetActive(isShop);
+        gamemmodesPanel.SetActive(false);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab)) 
@@ -64,12 +68,28 @@ public class NavigationController : MonoBehaviour
             }
         }
     }
-    public void ShowGame()
+
+    public void StartNormalGamemode()
+    {
+        ToggleMenu_Ingame();
+        spawnManager.SetGamemodeType(Gamemode.normal);
+        speedRunLevelController.SetupSpeedRun(false);
+        spawnManager.ResetSpeedrunSpawnpoints();
+        spawnManager.RespawnPlayer();
+    }
+    public void StartSpeedrunGamemode()
+    {
+        ToggleMenu_Ingame();
+        spawnManager.SetGamemodeType(Gamemode.speedrun);
+        spawnManager.ResetLastSpawnPoint();
+        spawnManager.ResetSpeedrunSpawnpoints();
+        speedRunLevelController.SetupSpeedRun(true);
+        spawnManager.RespawnPlayer();
+    }
+
+    public void ToggleMenu_Ingame()
     {
         isGame = !isGame;
-        if (isGame)
-            spawnManager.RespawnPlayer();
-
         inputGame.ShowCursorState(!isGame);
         swapCharacter.MakeCurrentCharacterModelActive();
         EnableCharacterControl(isGame);
@@ -79,11 +99,22 @@ public class NavigationController : MonoBehaviour
         deathMenu.SetActive(false);
         startCanvas.SetActive(!isGame);
         ingameCanvas.SetActive(isGame);
-    }
-
-    public void ShowGamemodeChoosing()
+        soundController.MakeClickSound();
+    }  
+    public void SwapChooseGamemodeToMainPanel()
     {
-
+        soundController.MakeClickSound();
+        gamemmodesPanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
+    
+    public void SwapMainToChooseGamemode()
+    {
+        soundController.MakeClickSound();
+        mainPanel.SetActive(false);
+        gamemmodesPanel.SetActive(true);
+        choosingGamemode.ChangeStartGameText();
+        choosingGamemode.ChangeBestTimeText();
     }
     public void ShowPauseMenu()
     {
@@ -102,24 +133,18 @@ public class NavigationController : MonoBehaviour
         mainCamera.GetComponent<OrbitingCamera>().enabled = state;
         playerObject.GetComponent<SimpleCharacterController>().enabled = state;
     }
-    public void ShowShopMenu() 
-    {      
-        isShop = !isShop;     
-        shopCamera.gameObject.SetActive(isShop);
-        shopCanvas.SetActive(isShop);
-        prevPageObject.SetActive(!isShop);
-    }
 
     public void ShowCharactersSwapScene()
     {
-        SceneManager.LoadScene("SwapHeroesScene");
+        soundController.MakeClickSound();
+        levelLoadAnimator.LoadNewScene("SwapHeroesScene");
     }
 
     public void ShowSettingMenu()
     {
+        soundController.MakeClickSound();
         isSettings = !isSettings;
-        settingsCanvas.SetActive(isSettings);
-       
+        settingsCanvas.SetActive(isSettings);      
     }
     public void SetPrevPage(GameObject objectToHide)
     {

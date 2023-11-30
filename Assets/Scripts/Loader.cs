@@ -30,17 +30,8 @@ public class Loader : MonoBehaviour
         level.SetActive(true);
         //player.SetActive(true);
         setup.SetActive(true);
-
-        StartCoroutine(StartLevel());
     }
 
-    IEnumerator StartLevel()
-    {
-        yield return new WaitForSeconds(0.7f);
-        if (LevelStartReciever.instance.canRunLevel)
-        {
-            navigationController.ShowGame();
-        }
-    }
+  
 
 }

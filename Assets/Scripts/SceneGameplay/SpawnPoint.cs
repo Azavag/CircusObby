@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    bool isSpawnAlreadySet;
+    bool isNormalSpawnAlreadySet;
+    bool isSpeedrunSpawnAlreadySet;
     SpawnManager spawnManager;
     SoundController soundController;
     [SerializeField] public Transform spawnCoordinates;
@@ -17,17 +18,26 @@ public class SpawnPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isSpawnAlreadySet)
+        if (isNormalSpawnAlreadySet && spawnManager.GetGamemodeType() == Gamemode.normal)
             return;
-        AlreadySet(true);
+        if (isSpeedrunSpawnAlreadySet && spawnManager.GetGamemodeType() == Gamemode.speedrun)
+            return;
+        AlreadySet(spawnManager.GetGamemodeType(), true);
         spawnManager.UpdatePointNumber(this);
-        spawnManager.SaveSpawnpointState(this);
+        if(spawnManager.GetGamemodeType() == Gamemode.normal)
+        {
+            spawnManager.SaveSpawnpointState(this);
+        }        
         soundController.Play("Success");
         spawnParticles.Play();
     }
 
-    public void AlreadySet(bool state)
+    public void AlreadySet(Gamemode mode, bool state)
     {
-        isSpawnAlreadySet = state;
+        if(mode == Gamemode.normal)
+            isNormalSpawnAlreadySet = state;
+        else isSpeedrunSpawnAlreadySet = state;
     }
+
+ 
 }

@@ -1,7 +1,5 @@
 mergeInto(LibraryManager.library, {
-
-  
-
+ 
 	// GiveMePlayerData: function () {
     // 	myGameInstance.SendMessage('Yandex', 'SetName', player.getName());
     // 	myGameInstance.SendMessage('Yandex', 'SetPhoto', player.getPhoto("medium"));
@@ -19,8 +17,7 @@ RateGameExtern: function () {
                         {
                           myGameInstance.SendMessage('ShopChooseController', 'SetRewardingState');                         
                           myGameInstance.SendMessage('ShopChooseController', 'UnlockRewardSkin');
-                        }   
-                                       
+                        }                                        
                     })
             } 
             else {
@@ -31,47 +28,26 @@ RateGameExtern: function () {
         })
   	},
 
-    Auth: function()
-    {
-      ysdk.auth.openAuthDialog();
-      myGameInstance.SendMessage('RateGameController', 'CloseAuthWindow');  
-    },
-  //   RateGameExtern: function(){
-  //   ysdk.feedback.canReview()
-  //   .then(({ value, reason }) => {
-  //     if (value) {
-  //       ysdk.feedback.requestReview()
-  //       .then(({ feedbackSent }) => {
-  //         myGameInstance.SendMessage("Progress","GiveHints");
-  //         myGameInstance.SendMessage("Progress","CloseRateUI");
-  //       })
-  //     } else {
-  //       ysdk.auth.openAuthDialog()
-  //       //console.log(reason)
-  //     }
-  //   })
-  // },
-
+  Auth: function()
+  {
+    ysdk.auth.openAuthDialog();
+    myGameInstance.SendMessage('RateGameController', 'CloseAuthWindow');  
+  },
 
 	SaveExtern: function(date) {
     if(player){
       var dateString = UTF8ToString(date);
       var myobj = JSON.parse(dateString);
-      player.setData(myobj);
-      
+      player.setData(myobj);     
     }
     },
 
   LoadExtern: function(){
     if(player){
       player.getData().then(_data => {
-      // console.log("Data is getting");
-      // console.log(_data);
       const myJSON = JSON.stringify(_data);
       myGameInstance.SendMessage('YandexSDK', 'SetPlayerInfo', myJSON);   
-      while(myJSON == null)
-        console.log('null');
-           
+      while(myJSON == null)      
        myGameInstance.SendMessage('Loader', 'LoadGame');
     });
     }   
@@ -80,7 +56,10 @@ RateGameExtern: function () {
   CheckSdkReady: function()
   {
     if(sdkReady)
-      myGameInstance.SendMessage('SceneLoader', 'SwitchScene'); 
+      {
+        console.log("sdkReady");
+        myGameInstance.SendMessage('SceneLoader', 'SwitchScene'); 
+      }
   },
 
   //Страничная реклама
@@ -128,30 +107,28 @@ RateGameExtern: function () {
     })
   },
 
- 	// SetToLeaderboard : function(value){
-  //   	ysdk.getLeaderboards()
-  //     	.then(lb => {
-  //         lb.setLeaderboardScore('Levels', value);
-  //     });
-  // 	},
-
-  
-  //   ShowLeaderBoard : function()
-  //   {  
-  //     ysdk.getLeaderboards()
-  //         .then(lb => {             
-  //             lb.getLeaderboardEntries('Levels', { includeUser: true})
-  //                 .then(res => {
-  //                 console.log(res);
-  //                 const JSONEntry = JSON.stringify(res);
-  //                 myGameInstance.SendMessage('YandexSDK', 'BoardEntriesReady', JSONEntry);        
-  //                 })
-  //         })
-  //         .catch(err => {
-  //           console.log("Ошибка");
-  //         });
-
-  //   },
+ 	SetToLeaderboard : function(value){
+    	ysdk.getLeaderboards()
+      	.then(lb => {
+          lb.setLeaderboardScore('BestTime', value);
+      });
+  	},
+ 
+    ShowLeaderBoard : function()
+    {  
+      ysdk.getLeaderboards()
+          .then(lb => {             
+              lb.getLeaderboardEntries('BestTime', { includeUser: false})
+                  .then(res => {
+                  console.log(res);
+                  const JSONEntry = JSON.stringify(res);
+                  myGameInstance.SendMessage('YandexSDK', 'BoardEntriesReady', JSONEntry);        
+                  })
+          })
+          .catch(err => {
+            console.log("Ошибка");
+          });
+    },
 
     CheckAuth: function()
     {    

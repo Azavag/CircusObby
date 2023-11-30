@@ -66,6 +66,7 @@ namespace MenteBacata.ScivoloCharacterController
 
         private CapsuleCollider capsuleCollider;
 
+        
         #region Cached Values
         /// <summary>
         /// Minimum up component of the ground normal for it to be considered floor. 

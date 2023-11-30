@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using SimpleJSON;
 
 public class YandexSDK : MonoBehaviour
 { 
@@ -15,12 +11,12 @@ public class YandexSDK : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void LoadExtern();
     //----Таблица лидеров----
-    //[DllImport("__Internal")]
+    [DllImport("__Internal")]
     //Вывести строку с записями
-    //private static extern void ShowLeaderBoard();
-    //[DllImport("__Internal")]
-    ////Добавить запись в таблицу
-    //private static extern void SetToLeaderboard(int value);
+    private static extern void ShowLeaderBoard();
+    [DllImport("__Internal")]
+    //Добавить запись в таблицу
+    private static extern void SetToLeaderboard(int value);
     //Проверка на авторизацию пользователя
     [DllImport("__Internal")]
     private static extern void CheckAuth();
@@ -33,9 +29,6 @@ public class YandexSDK : MonoBehaviour
     //Реклама с наградой
     [DllImport("__Internal")]
     private static extern void ShowRewardedAdvExtern();
-    //Получение языка
-    //[DllImport("__Internal")]
-    //private static extern string GetLang();
     //Получение типа устройства
     [DllImport("__Internal")]
     private static extern string GetDevice();
@@ -44,17 +37,17 @@ public class YandexSDK : MonoBehaviour
     private static extern string RateGameExtern();
 
 
-    //public event Action<string> LeaderBoardReady;
-    //LeaderboardController leaderboard;
-    //string jsonEntries;
-    bool isDataGetting;
+    public event Action<string> LeaderBoardReady;
+    LeaderboardController leaderboard;
+    string jsonEntries;
+
     string deviceType;
     public string domainType;
 
     public static YandexSDK instance;
     private void Awake()
     {
-        //LeaderBoardReady += SetJSONEntries;
+        LeaderBoardReady += SetJSONEntries;
         if (instance == null)
         {
             instance = this;
@@ -64,10 +57,6 @@ public class YandexSDK : MonoBehaviour
         else Destroy(gameObject);    
     }
 
-    void Start()
-    {
-        // leaderboard = FindObjectOfType<LeaderboardController>();       
-    }
     //Вызывается месте сохранения Save -> SaveExtern в jslib
     static public void Save()
     {
@@ -115,59 +104,41 @@ public class YandexSDK : MonoBehaviour
     }
 
 
-    //    public static void SetToLeaderboard()
-    //    {
-    //#if !UNITY_EDITOR
-    //        SetToLeaderboard(Progress.Instance.playerInfo.rounds); 
-    //#endif
-    //    }
-
-    //    public void CheckAuthorization()
-    //    {
-    //#if !UNITY_EDITOR
-    //        CheckAuth();
-    //#endif
-    //    }
+    public static void SetToLeaderboard()
+    {
+#if !UNITY_EDITOR
+            SetToLeaderboard(Progress.Instance.playerInfo.bestTimeSpeedrunMiliseconds); 
+#endif
+    }
+    public void SetLeaderboardObject(LeaderboardController leaderboardController)
+    {
+        leaderboard = leaderboardController;
+    }
     //ShowLeaderBoard() -> BoardEntriesReady -> SetJSONEntries
-    //    public void GetLeaderboardEntries()
-    //    {
-    //#if !UNITY_EDITOR
-    //        ShowLeaderBoard();
-    //#endif       
-    //    }
-    //public void BoardEntriesReady(string _data)
-    //{
-    //    LeaderBoardReady?.Invoke(_data);      
-    //}
-    //public void SetJSONEntries(string json)
-    //{      
-    //    jsonEntries = json;
-    //    leaderboard.OpenEntries();
-    //}
-    //public string GetJSONEntries()
-    //{
-    //    return jsonEntries;
-    //}
+    public void GetLeaderboardEntries()
+    {
+#if !UNITY_EDITOR
+            ShowLeaderBoard();
+#endif
+    }
+    public void BoardEntriesReady(string _data)
+    {
+        LeaderBoardReady?.Invoke(_data);
+    }
+    public void SetJSONEntries(string json)
+    {
+        jsonEntries = json;
+        leaderboard.OpenEntries();
+    }
+    public string GetJSONEntries()
+    {
+        return jsonEntries;
+    }
 
-    //private void OnDestroy()
-    //{
-    //    LeaderBoardReady -= SetJSONEntries;
-    //}
-
-    //public bool GetDataCheck()
-    //{
-    //    return isDataGetting;
-    //}
-    //public void SetDataCheck(bool state)
-    //{
-    //    isDataGetting = state;
-    //}
-//    static public void GetCurrentLanguage()
-//    {
-//#if !UNITY_EDITOR
-//        string lang = GetLang();
-//#endif
-//    }
+    private void OnDestroy()
+    {
+        LeaderBoardReady -= SetJSONEntries;
+    }
 
     public void GetDeviceInfo()
     {
@@ -191,6 +162,5 @@ public class YandexSDK : MonoBehaviour
 #else
         Debug.Log("Оценка игры");
 #endif
-
     }
 }

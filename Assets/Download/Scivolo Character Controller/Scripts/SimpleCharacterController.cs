@@ -1,9 +1,5 @@
-﻿using Codice.CM.Client.Differences.Merge;
-using MenteBacata.ScivoloCharacterController;
-using System.Collections.Generic;
+﻿using MenteBacata.ScivoloCharacterController;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 namespace MenteBacata.ScivoloCharacterControllerDemo
 {
@@ -56,6 +52,10 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
         private Vector3 JoystickVector;
         bool isJoystickJump;
+        float deathTimer = 0f;
+        float deathInterval = 1f;
+        public bool isDead = false;
+        
 
         private void Start()
         {
@@ -124,7 +124,29 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
         {
             if (isOnMovingPlatform)
                 ApplyPlatformMovement(movingPlatform);
+
+            if (verticalSpeed == minVerticalSpeed && !isDead)
+            {
+                DeathTimer();
+            }
+            else deathTimer = 0;
         }
+
+        void DeathTimer()
+        {
+            deathTimer += Time.deltaTime;
+            if (deathTimer >= deathInterval)
+            {
+                isDead = true;
+            }
+        }
+        
+        public void ResetPlayerState()
+        {
+            deathTimer = 0;
+            isDead = false;
+        }
+
         public void SetCurrentCharacterAnimator()
         {
             animator = GetComponentInChildren<Animator>();

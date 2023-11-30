@@ -13,9 +13,9 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 
         public float sensitivity = 100f;
 
-        private float yRot = 0f;
+        private float yRot = 180f;
 
-        private float xRot = 20f;
+        private float xRot;
         Vector2 touchStart, touchEnd;
         Rect blockZone1;
         Rect blockZone2;
@@ -30,7 +30,8 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
 #if UNITY_EDITOR
             // Somehow after updating to 2019.3, mouse axes sensitivity decreased, but only in the editor.
             sensitivity *= 10f;
-#endif                    
+#endif              
+            SetStartCameraRotation();
         }
 
         private void FixedUpdate()
@@ -81,10 +82,13 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
             Quaternion worldRotation = transform.parent != null ? transform.parent.rotation : Quaternion.FromToRotation(Vector3.up, target.up);
             Quaternion cameraRotation = worldRotation * Quaternion.Euler(xRot, yRot, 0f);
             Vector3 targetToCamera = cameraRotation * new Vector3(0f, 0f, -distance);
-
             transform.SetPositionAndRotation(target.TransformPoint(0f, verticalOffset, 0f) + targetToCamera, cameraRotation);
         }
-
+        public void SetStartCameraRotation()
+        {
+            xRot = 30f;
+            yRot = target.rotation.eulerAngles.y;
+        }
         public void SetMobile(bool state)
         {
             isMobile = state;

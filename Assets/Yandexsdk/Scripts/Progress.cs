@@ -20,6 +20,7 @@ public class PlayerInfo
     public bool isNavButtonActive;          //++
     public bool[] areSpawnpointsSet = new bool[51];
     public int choosenCharacterNumber;
+    public int bestTimeSpeedrunMiliseconds = -1;
 }
 
 public class Progress : MonoBehaviour

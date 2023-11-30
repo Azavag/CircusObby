@@ -107,9 +107,15 @@ public class CharacterSwapper : MonoBehaviour
     }
     void OnSlideEnd()
     {
-        characterNameText.text = characters[currentCharacterNumber].characterName;
+        ShowCharacterName();
         LightOn();
         canSwap = true;
+    }
+    void ShowCharacterName()
+    {
+        if(Language.Instance.currentLanguage == "ru")
+            characterNameText.text = characters[currentCharacterNumber].characterNameRU;
+        else characterNameText.text = characters[currentCharacterNumber].characterNameEN;
     }
     public void LightOn()
     {
@@ -142,12 +148,11 @@ public class CharacterSwapper : MonoBehaviour
         foreach (var character in characters)
             character.isChoosed = false;
         characters[currentCharacterNumber].isChoosed = true;
-        LightOn();
-        PlayChoosingAnimation();
+        LightOn();       
         CheckChoosingButtons();
     }
 
-    void PlayChoosingAnimation()
+    public void PlayChoosingAnimation()
     {
         characters[currentCharacterNumber].animator.SetTrigger("choosed");
     }
@@ -160,10 +165,6 @@ public class CharacterSwapper : MonoBehaviour
     {
         if (characters[currentCharacterNumber].isChoosed)
             choosingButton.gameObject.SetActive(false);
-        else
-        {
-            choosingButton.gameObject.SetActive(true);
-            choosingButton.GetComponentInChildren<TextMeshProUGUI>().text = "Выбрать";
-        }
+        else choosingButton.gameObject.SetActive(true);
     }
 }

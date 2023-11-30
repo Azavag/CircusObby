@@ -8,9 +8,11 @@ public class CharacterSwapNavigation : MonoBehaviour
 {
     [SerializeField] CharacterSwapper characterSwapper;
     SoundController soundController;
+    LevelLoadAnimator levelLoadAnimator;
     private void Awake()
     {
         soundController = FindObjectOfType<SoundController>();
+        levelLoadAnimator = FindObjectOfType<LevelLoadAnimator>();
     }
 
     //По кнопке выбрать
@@ -18,6 +20,7 @@ public class CharacterSwapNavigation : MonoBehaviour
     {
         soundController.Play("PositiveClick");
         characterSwapper.SetChoosedStateToCharacter();
+        characterSwapper.PlayChoosingAnimation();
         Progress.Instance.playerInfo.choosenCharacterNumber = characterSwapper.GetCurrentCharacterNumber();
         YandexSDK.Save();
     }
@@ -31,15 +34,9 @@ public class CharacterSwapNavigation : MonoBehaviour
         characterSwapper.RightHeroSlide();
     }
 
-    public void SwitchSceneToGame()
-    {
-        LevelStartReciever.instance.canRunLevel = true;
-        SceneManager.LoadScene("MainScene");        
-    }
     public void SwitchSceneToMenu()
     {
-        LevelStartReciever.instance.canRunLevel = false;
-        SceneManager.LoadScene("MainScene");
+        levelLoadAnimator.LoadNewScene("MainScene");
     }
 
 }

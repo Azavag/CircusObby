@@ -95,7 +95,7 @@ public class MoneyManager : MonoBehaviour
     {
         runsCount++;       
         maxMoneyCount = (runsCount * moneyOnRun);
-        spawnManager.ResetSpawnpoints();
+        spawnManager.ResetNormalSpawnpoints();
         spawnManager.UpdatePointNumber(startSpawnPoint);
         spawnManager.RespawnPlayer();
         finalMenu.SetActive(false);
