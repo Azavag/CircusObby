@@ -95,17 +95,20 @@ public class SoundController : MonoBehaviour
     {      
         mixer.SetFloat("EffectsVolume", Mathf.Log10(effectsSlider.value) * 20);
         effectsVolume = effectsSlider.value;
-        Progress.Instance.playerInfo.effectsVolume = effectsVolume;
+        
     }
     public void SetMusicLevel()
     {
         mixer.SetFloat("MusicVolume", Mathf.Log10(musicSlider.value) * 20);
         musicVolume = musicSlider.value;
-        Progress.Instance.playerInfo.musicVolume = musicVolume;
+        
     }
     //По кнопке Закрыть
     public void SaveVolumeSetting()
     {
+        Debug.Log("Save");
+        Progress.Instance.playerInfo.effectsVolume = effectsVolume;
+        Progress.Instance.playerInfo.musicVolume = musicVolume;
         YandexSDK.Save();
     }
 

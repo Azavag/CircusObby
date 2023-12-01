@@ -9,7 +9,10 @@ public class StartSpeedRunTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        speedRunLevelController.StartSpeedRun();
-        gameObject.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            speedRunLevelController.StartSpeedRun();
+            gameObject.SetActive(false);
+        }       
     }
 }

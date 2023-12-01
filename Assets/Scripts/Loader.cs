@@ -6,7 +6,6 @@ public class Loader : MonoBehaviour
 {
     [SerializeField] GameObject controllers, canvases, sdk, level, player, setup;
     [SerializeField] bool inEditor;
-    [SerializeField] NavigationController navigationController;
     private void Awake()
     {
         sdk.SetActive(false);
@@ -18,9 +17,7 @@ public class Loader : MonoBehaviour
     }
     private void Start()
     {
-#if UNITY_EDITOR
         LoadGame();
-#endif
     }
     public void LoadGame()
     {
@@ -28,7 +25,7 @@ public class Loader : MonoBehaviour
         controllers.SetActive(true);
         canvases.SetActive(true);
         level.SetActive(true);
-        //player.SetActive(true);
+        player.SetActive(true);
         setup.SetActive(true);
     }
 

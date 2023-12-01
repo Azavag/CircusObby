@@ -23,7 +23,6 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void SwitchScene()
     {
-        Debug.Log("SwitchScene");
         SceneManager.LoadScene("MainScene");
     }
 }

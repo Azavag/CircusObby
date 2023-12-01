@@ -9,6 +9,7 @@ public class SpeedRunLevelController : MonoBehaviour
     [SerializeField] GameObject timerPlaceObject;
     [SerializeField] TextMeshProUGUI ingameTimerText;
     [SerializeField] GameObject leaderboardObject;
+    [SerializeField] LeaderboardController leaderboardController;
     [Header("Триггеры")]
     [SerializeField] GameObject startTrigger;
     [SerializeField] GameObject endTrigger;
@@ -23,6 +24,7 @@ public class SpeedRunLevelController : MonoBehaviour
         startTrigger.SetActive(state);
         endTrigger.SetActive(state);
         leaderboardObject.SetActive(state);
+        leaderboardController.RecieveLeaderBoard();
         speedRunData.ResetTimer();
         ShowCurrentTimerText();
     }
@@ -34,9 +36,13 @@ public class SpeedRunLevelController : MonoBehaviour
 
     public void StartSpeedRun()
     {
-        speedRunData.StartTimer();
-       
+        speedRunData.StartTimer();     
     }
+    public void ToggleSpeedRun(bool state)
+    {
+        speedRunData.PauseTimer(state);
+    }
+
     public void EndSpeedRun()
     {
         speedRunData.EndTimer();

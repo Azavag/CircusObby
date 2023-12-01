@@ -21,11 +21,10 @@ public class NavigationController : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
     [SerializeField] GameObject pauseButton;
-    GameObject prevPageObject;
     [SerializeField] SpawnManager spawnManager;
     [SerializeField] AdvManager advManager;
     [SerializeField] InputGame inputGame;
-    [SerializeField] GameObject levelsNavAlert;     //Удалить?
+    [SerializeField] GameObject endGamePanel;     //Удалить?
     bool isPause;
     bool isSettings;
     bool isGame;
@@ -52,7 +51,7 @@ public class NavigationController : MonoBehaviour
         deathMenu.SetActive(isGame);
         pauseMenu.SetActive(isPause);
         pauseButton.SetActive(!isPause);
-        levelsNavAlert.SetActive(false);
+        endGamePanel.SetActive(false);
         gamemmodesPanel.SetActive(false);
     }
 
@@ -90,6 +89,8 @@ public class NavigationController : MonoBehaviour
     public void ToggleMenu_Ingame()
     {
         isGame = !isGame;
+        if (!isGame)
+            speedRunLevelController.EndSpeedRun();
         inputGame.ShowCursorState(!isGame);
         swapCharacter.MakeCurrentCharacterModelActive();
         EnableCharacterControl(isGame);
@@ -117,11 +118,11 @@ public class NavigationController : MonoBehaviour
         choosingGamemode.ChangeBestTimeText();
     }
     public void ShowPauseMenu()
-    {
+    {       
         isPause = !isPause;       
         pauseMenu.SetActive(isPause);
         pauseButton.SetActive(!isPause);
-        
+        speedRunLevelController.ToggleSpeedRun(isPause);
         if (!deathMenu.activeSelf)
         {
             EnableCharacterControl(!isPause);
@@ -146,14 +147,10 @@ public class NavigationController : MonoBehaviour
         isSettings = !isSettings;
         settingsCanvas.SetActive(isSettings);      
     }
-    public void SetPrevPage(GameObject objectToHide)
-    {
-        prevPageObject = objectToHide;
-    }
 
-    public void ShowLevelsNavHint(bool state)
+    public void ShowEndGamePanel(bool state)
     {
-        levelsNavAlert.SetActive(state);
+        endGamePanel.SetActive(state);
         EnableCharacterControl(!state);
         inputGame.ShowCursorState(state);
     }

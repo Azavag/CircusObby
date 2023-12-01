@@ -26,15 +26,16 @@ public class SpeedrunData : MonoBehaviour
 
     public void StartTimer()
     {
+        Debug.Log("StartTimer");
         timeIsGoing = true;
     }
     void TimeProccess()
     {
         mainTimer += Time.deltaTime;
     }
-    public void TogglePauseTimer()
+    public void PauseTimer(bool state)
     {
-        timeIsGoing = !timeIsGoing;
+        timeIsGoing = state;
     }
     public void EndTimer()
     {

@@ -8,16 +8,7 @@ public class LevelLoadAnimator : MonoBehaviour
     [SerializeField] Animator transition;
     float transitionDuration = 0.6f;
     public static LevelLoadAnimator instance;
-    private void Awake()
-    {
-        //if (instance == null)
-        //{
-        //    instance = this;
-        //    DontDestroyOnLoad(gameObject);
-        //}
-        //else Destroy(gameObject);
-        
-    }
+
     public void LoadNewScene(string sceneName)
     {
         StartCoroutine(LoadSceneRoutine(sceneName));

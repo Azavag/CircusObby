@@ -2,9 +2,6 @@ using MenteBacata.ScivoloCharacterControllerDemo;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Xml.Linq;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -23,6 +20,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] HardLevelsNavigation levelsNavigation;
     [SerializeField] NavigationController navigationController;
     [SerializeField] GameObject deathAlert;
+    [SerializeField] SpeedRunLevelController speedRunLevelController;
     Animator deathAlertanimator;
     SoundController soundController;
     private void Awake()
@@ -50,24 +48,28 @@ public class SpawnManager : MonoBehaviour
 
         if (lastNormalSpawnPoint == spawnPointsList.Count - 1)
         {
-            //Кат-сцена
-
-            //navigationController.ShowLevelsNavHint(true);
+            StartCoroutine(EndGameRoutine());
         }
-        //Progress.Instance.playerInfo.spawnPointNumber = lastNormalSpawnPoint;
+    }
+    IEnumerator EndGameRoutine()
+    {
+        yield return new WaitForSeconds(1.2f);
+        navigationController.ShowEndGamePanel(true);
+        ResetLastSpawnPoint();
+        ResetNormalSpawnpoints();
     }
     public void UpdatePointNumber(int pointNumber)
     {
         lastNormalSpawnPoint = pointNumber;
     }
- 
     //По кнопке перерождения
     public void RespawnPlayer()
     {
         if (gamemodeType == Gamemode.normal)
             playerObject.transform.position = spawnPointsList[lastNormalSpawnPoint].spawnCoordinates.position;
         else playerObject.transform.position = speedRunSpawnPointsList[lastSpeedrunSpawnpoint].spawnCoordinates.position;
-       
+
+        speedRunLevelController.ToggleSpeedRun(true);
         characterController.ResetPlayerState();
         deathMenu.SetActive(false);
         deathAlert.SetActive(false);
@@ -92,6 +94,7 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator DeathProccess()
     {
         yield return new WaitUntil(() => characterController.isDead);
+        speedRunLevelController.ToggleSpeedRun(false);
         BlockInput();
         soundController.Play("Death");
         deathAlert.SetActive(true);
