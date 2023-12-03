@@ -6,23 +6,25 @@ using UnityEngine.Playables;
 public class FinalTimeline : MonoBehaviour
 {
     [SerializeField] PlayableDirector[] finalTimelineDirectors;
-    PlayableDirector currentDirector;
     [SerializeField] GameObject finalObjects;
     [SerializeField] GameObject playerObject;
     [SerializeField] Transform finalPoint;
     [SerializeField] Transform TropheyTransform;
     [SerializeField] OrbitingCamera orbitingCamera;
+    PlayableDirector currentDirector;
+    BoxCollider triggerCollider;
 
     private void Awake()
     {
         finalObjects.SetActive(false);
-        
+        triggerCollider = GetComponent<BoxCollider>();
     }
 
     void OnPlayableDirectorStopped(PlayableDirector aDirector)
     {
         if (currentDirector == aDirector)
         {
+            SwitchTriggerCollider(false);
             playerObject.transform.position = finalPoint.position;
             playerObject.transform.rotation = TropheyTransform.rotation;
             orbitingCamera.SetStartCameraRotation();
@@ -30,6 +32,10 @@ public class FinalTimeline : MonoBehaviour
         }
     }
 
+    public void SwitchTriggerCollider(bool state)
+    {
+        triggerCollider.enabled = state;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
