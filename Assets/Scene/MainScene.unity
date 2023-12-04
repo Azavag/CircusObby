@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 1
     smallestHole: 0.25
     backfaceThreshold: 70
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 10d8a9820a4bc8641b664104d8ab9b0b
+  m_OcclusionCullingData: {fileID: 36300000, guid: 94244e61c94160b43b2efc4f5f3973da,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -2226,7 +2227,7 @@ Transform:
   m_GameObject: {fileID: 55114070}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -542.05505, y: -581.3599, z: 18.102741}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12783,6 +12784,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_Name
       value: ring_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_LocalScale.x
@@ -32335,7 +32340,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &687002701
 Transform:
@@ -36305,7 +36310,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &793132247
 Transform:
@@ -39132,6 +39137,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_Name
       value: ring_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_LocalScale.x
@@ -42651,7 +42660,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &963274019
 Transform:
@@ -45751,6 +45760,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_Name
       value: ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_LocalScale.x
@@ -75020,6 +75033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ring
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_LocalScale.x
       value: 41.59149
@@ -79069,7 +79086,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1894146681
 Transform:
@@ -86817,7 +86834,7 @@ Transform:
   m_GameObject: {fileID: 2106391479}
   serializedVersion: 2
   m_LocalRotation: {x: 0.065459095, y: -0.016127914, z: 0.0010581266, w: 0.99772435}
-  m_LocalPosition: {x: 45.370148, y: 176.72186, z: -59.89691}
+  m_LocalPosition: {x: -496.6849, y: -404.63806, z: -41.79417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87221,6 +87238,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_Name
       value: ring_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 94c29bfdbb24c4e45a3bc0982aedb13b, type: 3}
       propertyPath: m_LocalScale.x
@@ -89969,6 +89990,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stairs
       objectReference: {fileID: 0}
+    - target: {fileID: 7172063089197278327, guid: d189ac5499d983e40aba50d60f8ff656,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7522285640950766760, guid: d189ac5499d983e40aba50d60f8ff656,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -90307,7 +90333,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &4999411992079694589
 BoxCollider:

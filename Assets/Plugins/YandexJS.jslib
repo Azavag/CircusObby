@@ -67,13 +67,13 @@ RateGameExtern: function () {
     ysdk.adv.showFullscreenAdv({
       callbacks: {       
          onOpen: () => {
-          myGameInstance.SendMessage("SoundController", "MuteGame");         
+          myGameInstance.SendMessage("SoundSettingsCanvas", "MuteGame");         
           console.log('Adv open.');
         },
         onClose: function(wasShown) {
           console.log("Adv closed");
           myGameInstance.SendMessage('AdvManager', 'StartTimer');
-          myGameInstance.SendMessage("SoundController", "UnmuteGame");
+          myGameInstance.SendMessage("SoundSettingsCanvas", "UnmuteGame");
         },
         onError: function(error) {
           // some action on error

@@ -19,7 +19,7 @@ public class PlayerInfo
     public string choosedSpecialColor;      //++
     public bool isNavButtonActive;          //++
     public bool[] areSpawnpointsSet = new bool[51];
-    public int choosenCharacterNumber;
+    public int choosenCharacterNumber = 2;
     public int bestTimeSpeedrunMiliseconds = -1;
 }
 

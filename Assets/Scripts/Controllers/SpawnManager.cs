@@ -70,7 +70,7 @@ public class SpawnManager : MonoBehaviour
         else playerObject.transform.position = speedRunSpawnPointsList[lastSpeedrunSpawnpoint].spawnCoordinates.position;
 
         soundController.MakeClickSound();
-        speedRunLevelController.ToggleSpeedRun(false);
+        speedRunLevelController.ToggleSpeedRunTimer(false);
         characterController.ResetPlayerState();
         deathMenu.SetActive(false);
         deathAlert.SetActive(false);
@@ -100,14 +100,15 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator DeathProccess()
     {
         yield return new WaitUntil(() => characterController.isDead);
-        speedRunLevelController.ToggleSpeedRun(true);
+        speedRunLevelController.ToggleSpeedRunTimer(true);
         BlockInput();
         soundController.Play("Death");
         deathAlert.SetActive(true);
         deathAlertanimator.SetBool("isDeath", true);
-        yield return new WaitForSeconds(1.6f);
-        deathMenu.SetActive(true);
+        yield return new WaitForSeconds(1.4f);
         advManager.ShowAdv();        
+        yield return new WaitForSeconds(0.2f);
+        deathMenu.SetActive(true);
     }
     public void SaveSpawnpointState(SpawnPoint point)
     {

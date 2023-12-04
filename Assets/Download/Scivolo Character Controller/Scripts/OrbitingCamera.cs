@@ -46,7 +46,7 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
         }
         private void LateUpdate()
         {
-            if (!isMobile && Input.GetMouseButton(1))
+            if (!isMobile)
             {
                 yRot += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
                 xRot -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;

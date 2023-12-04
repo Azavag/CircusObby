@@ -37,7 +37,7 @@ public class SpeedRunLevelController : MonoBehaviour
     {
         speedRunData.StartTimer();     
     }
-    public void ToggleSpeedRun(bool state)
+    public void ToggleSpeedRunTimer(bool state)
     {
         speedRunData.PauseTimer(state);
     }

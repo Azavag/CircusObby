@@ -120,7 +120,7 @@ public class NavigationController : MonoBehaviour
         isPause = !isPause;       
         pauseMenu.SetActive(isPause);
         pauseButton.SetActive(!isPause);
-        speedRunLevelController.ToggleSpeedRun(isPause);
+        speedRunLevelController.ToggleSpeedRunTimer(isPause);
         if (!deathMenu.activeSelf)
         {
             EnableCharacterControl(!isPause);

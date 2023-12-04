@@ -810,7 +810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersTransform: {fileID: 897249697}
   characters: []
-  currentCharacterNumber: 2
+  currentCharacterNumber: 0
   characterNameText: {fileID: 667729519}
   slideTime: 0.5
   scaleMultiplier: 1.15

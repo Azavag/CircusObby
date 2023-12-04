@@ -9,7 +9,7 @@ public class CharacterSwapper : MonoBehaviour
 {
     [SerializeField] Transform charactersTransform;
     [SerializeField] CharacterStand[] characters;
-    [SerializeField] int currentCharacterNumber;
+    [SerializeField] int currentCharacterNumber = 2;
     Transform currentCharacterTransform;
     [SerializeField] TextMeshProUGUI characterNameText;
     [Header("Анимация перехода")]
