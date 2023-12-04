@@ -68,21 +68,10 @@ public class LeaderboardController : MonoBehaviour
             int timeScore = Int32.Parse(time);
             int minutes = timeScore / 60000;
             int seconds = (timeScore % 60000) / 1000;
-            otherPlayersEntryScore[i].GetComponent<TextMeshProUGUI>().text = $"{minutes}:{seconds}";
+            otherPlayersEntryScore[i].GetComponent<TextMeshProUGUI>().text = $"{minutes}:{seconds:00}";
         }
     }
 
-    void LoadingAnimation()
-    {
-        //loadingPanel.SetActive(true);
-        //LeanTween.scaleX(loadingBar,1f,loadTime).setOnComplete(EndLoad);
-    }
-  
-    void HideLoadingPanel()
-    {
-        //loadingPanel.SetActive(false);
-        //LeanTween.scaleX(loadingBar, 0.01f, 0f);
-    }
     public void Launch()
     {
         //loadingPanel.SetActive(true);

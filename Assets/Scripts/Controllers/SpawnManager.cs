@@ -8,8 +8,8 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] List<SpawnPoint> spawnPointsList;
     [SerializeField] List<SpawnPoint> speedRunSpawnPointsList;
-    int lastNormalSpawnPoint;       //Чекпоинты в прохождении
-    int lastSpeedrunSpawnpoint;     //ЧекпоинтЫ в спидране
+    int lastNormalSpawnPoint;                   //Чекпоинты в прохождении
+    int lastSpeedrunSpawnpoint;                 //ЧекпоинтЫ в спидране
     Gamemode gamemodeType;
     [SerializeField] GameObject playerObject;
     [SerializeField] GameObject deathMenu;
@@ -17,7 +17,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] AdvManager advManager;
     [SerializeField] InputGame inputGame;
     [SerializeField] SimpleCharacterController characterController;
-    [SerializeField] HardLevelsNavigation levelsNavigation;
     [SerializeField] NavigationController navigationController;
     [SerializeField] GameObject deathAlert;
     [SerializeField] SpeedRunLevelController speedRunLevelController;
@@ -53,6 +52,7 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator EndGameRoutine()
     {
+        soundController.Play("WinGame");
         yield return new WaitForSeconds(1.2f);
         navigationController.ShowEndGamePanel(true);
         ResetLastSpawnPoint();
@@ -69,7 +69,8 @@ public class SpawnManager : MonoBehaviour
             playerObject.transform.position = spawnPointsList[lastNormalSpawnPoint].spawnCoordinates.position;
         else playerObject.transform.position = speedRunSpawnPointsList[lastSpeedrunSpawnpoint].spawnCoordinates.position;
 
-        speedRunLevelController.ToggleSpeedRun(true);
+        soundController.MakeClickSound();
+        speedRunLevelController.ToggleSpeedRun(false);
         characterController.ResetPlayerState();
         deathMenu.SetActive(false);
         deathAlert.SetActive(false);
@@ -81,7 +82,12 @@ public class SpawnManager : MonoBehaviour
     public void ResetLastSpawnPoint()
     {
         if (gamemodeType == Gamemode.normal)
+        {
             lastNormalSpawnPoint = 0;
+            Progress.Instance.playerInfo.spawnPointNumber = 0;
+            YandexSDK.Save();
+        }
+
         else lastSpeedrunSpawnpoint = 0;
     }
 
@@ -94,7 +100,7 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator DeathProccess()
     {
         yield return new WaitUntil(() => characterController.isDead);
-        speedRunLevelController.ToggleSpeedRun(false);
+        speedRunLevelController.ToggleSpeedRun(true);
         BlockInput();
         soundController.Play("Death");
         deathAlert.SetActive(true);
@@ -106,6 +112,7 @@ public class SpawnManager : MonoBehaviour
     public void SaveSpawnpointState(SpawnPoint point)
     {
         int tempNumber = spawnPointsList.IndexOf(point);
+        Progress.Instance.playerInfo.spawnPointNumber = tempNumber;
         Progress.Instance.playerInfo.areSpawnpointsSet[tempNumber] = true;
         YandexSDK.Save();
     }

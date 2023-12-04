@@ -27,24 +27,6 @@ public class SoundController : MonoBehaviour
         }
         else Destroy(gameObject);
 
-        //if (instance == null)
-        //{
-        //    //First run, set the instance
-        //    instance = this;
-        //    transform.SetParent(null);
-        //    DontDestroyOnLoad(gameObject);
-
-        //}
-        //else if (instance != this)
-        //{
-        //    //Instance is not the same as the one we have, destroy old one, and reset to newest one
-        //    Destroy(instance.gameObject);
-        //    instance = this;
-        //    transform.SetParent(null);
-        //    DontDestroyOnLoad(gameObject);
-        //}
-
-
         foreach (Sound s in sounds)
         {                 
             s.audioSource = gameObject.AddComponent<AudioSource>();
@@ -68,7 +50,6 @@ public class SoundController : MonoBehaviour
 
     void Start()
     {
-        //effectsSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
         Play("Background");
         effectsSlider.value = Progress.Instance.playerInfo.effectsVolume;
         musicSlider.value = Progress.Instance.playerInfo.musicVolume;
@@ -103,10 +84,9 @@ public class SoundController : MonoBehaviour
         musicVolume = musicSlider.value;
         
     }
-    //По кнопке Закрыть
+    
     public void SaveVolumeSetting()
     {
-        Debug.Log("Save");
         Progress.Instance.playerInfo.effectsVolume = effectsVolume;
         Progress.Instance.playerInfo.musicVolume = musicVolume;
         YandexSDK.Save();

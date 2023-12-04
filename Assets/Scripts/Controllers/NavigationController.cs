@@ -2,50 +2,48 @@ using MenteBacata.ScivoloCharacterControllerDemo;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class NavigationController : MonoBehaviour
 {
     [Header("Канвасы")]
     [SerializeField] GameObject ingameCanvas;
-    [SerializeField] GameObject shopCanvas;
     [SerializeField] GameObject startCanvas;
-    [SerializeField] GameObject alertCanvas;
     [SerializeField] GameObject settingsCanvas;
     [Header("Панели в главном меню")]
     [SerializeField] GameObject mainPanel;
     [SerializeField] GameObject gamemmodesPanel;
-
-    [SerializeField] Camera mainCamera;
-    [SerializeField] GameObject playerObject;
+    [Header("Панели в игре")]
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMenu;
+    [SerializeField] GameObject endGamePanel;
+    [Header("Объекты на сцене")]
+    [SerializeField] Camera mainCamera;
+    [SerializeField] GameObject playerObject;
     [SerializeField] GameObject pauseButton;
+    [Header("Контроллеры")]
     [SerializeField] SpawnManager spawnManager;
     [SerializeField] AdvManager advManager;
     [SerializeField] InputGame inputGame;
-    [SerializeField] GameObject endGamePanel;     //Удалить?
+    [SerializeField] SoundController soundController;
+    [SerializeField] SwapCharacterModel swapCharacter;
+    [SerializeField] SpeedRunLevelController speedRunLevelController;
+    ChoosingGamemode choosingGamemode;
+    SceneLoadingAnimator levelLoadAnimator;
     bool isPause;
     bool isSettings;
     bool isGame;
 
-    [SerializeField] SoundController soundController;
-    [SerializeField] SwapCharacterModel swapCharacter;
-    ChoosingGamemode choosingGamemode;
-    [SerializeField] SpeedRunLevelController speedRunLevelController;
-    LevelLoadAnimator levelLoadAnimator;
     private void Awake()
     {
         soundController = FindObjectOfType<SoundController>();
         settingsCanvas = soundController.transform.GetChild(0).gameObject;
         choosingGamemode = GetComponent<ChoosingGamemode>();
-        levelLoadAnimator = FindObjectOfType<LevelLoadAnimator>();
+        levelLoadAnimator = FindObjectOfType<SceneLoadingAnimator>();
     }
     void Start()
     {
         startCanvas.SetActive(true);
         ingameCanvas.SetActive(false);
-        alertCanvas.SetActive(false);
         settingsCanvas.SetActive(false);
         EnableCharacterControl(isGame);
         deathMenu.SetActive(isGame);
@@ -62,7 +60,6 @@ public class NavigationController : MonoBehaviour
         {
             if (!isPause)
             {
-                soundController.MakeClickSound();
                 ShowPauseMenu();
             }
         }
@@ -90,7 +87,7 @@ public class NavigationController : MonoBehaviour
     {
         isGame = !isGame;
         if (!isGame)
-            speedRunLevelController.EndSpeedRun();
+            speedRunLevelController.CancelSpeedRun();
         inputGame.ShowCursorState(!isGame);
         swapCharacter.MakeCurrentCharacterModelActive();
         EnableCharacterControl(isGame);
@@ -118,7 +115,8 @@ public class NavigationController : MonoBehaviour
         choosingGamemode.ChangeBestTimeText();
     }
     public void ShowPauseMenu()
-    {       
+    {
+        soundController.MakeClickSound();
         isPause = !isPause;       
         pauseMenu.SetActive(isPause);
         pauseButton.SetActive(!isPause);
