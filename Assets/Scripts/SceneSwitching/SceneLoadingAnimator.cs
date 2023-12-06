@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +6,6 @@ public class SceneLoadingAnimator : MonoBehaviour
 {
     [SerializeField] Animator transition;
     float transitionDuration = 0.6f;
-    public static SceneLoadingAnimator instance;
 
     public void LoadNewScene(string sceneName)
     {

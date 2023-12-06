@@ -50,9 +50,9 @@ public class SoundController : MonoBehaviour
 
     void Start()
     {
-        Play("Background");
         effectsSlider.value = Progress.Instance.playerInfo.effectsVolume;
         musicSlider.value = Progress.Instance.playerInfo.musicVolume;
+        Play("Background");
     }
 
     public void Play(string name)

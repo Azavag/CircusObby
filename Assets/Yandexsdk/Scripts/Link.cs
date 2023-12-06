@@ -14,17 +14,12 @@ public class Link : MonoBehaviour
     string link = "";
     SoundController soundController;
     private void Awake()
-    {
-        
+    {      
         if (Instance == null)
         {
             Instance = this;
-
         }
         else Destroy(gameObject);
-    }
-    private void Start()
-    {
         soundController = FindObjectOfType<SoundController>();
     }
 

@@ -45,10 +45,10 @@ RateGameExtern: function () {
   LoadExtern: function(){
     if(player){
       player.getData().then(_data => {
+      console.log(_data);
       const myJSON = JSON.stringify(_data);
-      myGameInstance.SendMessage('YandexSDK', 'SetPlayerInfo', myJSON);   
-      while(myJSON == null)      
-       myGameInstance.SendMessage('Loader', 'LoadGame');
+      myGameInstance.SendMessage('YandexSDK', 'SetPlayerInfo', myJSON);           
+      myGameInstance.SendMessage('ProgressLoadingChecker', 'ConfirmProgressLoaded');
     });
     }   
   },
