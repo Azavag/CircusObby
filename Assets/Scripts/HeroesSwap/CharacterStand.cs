@@ -12,8 +12,4 @@ public class CharacterStand : MonoBehaviour
     public bool isChoosed;
     public Animator animator;
 
-    private void Start()
-    {
-        xPosition = transform.position.x;
-    }
 }

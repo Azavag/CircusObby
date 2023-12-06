@@ -19,6 +19,10 @@ public class FinalTimeline : MonoBehaviour
         finalObjects.SetActive(false);
         triggerCollider = GetComponent<BoxCollider>();
     }
+    private void Start()
+    {
+        currentDirector = finalTimelineDirectors[0];
+    }
 
     void OnPlayableDirectorStopped(PlayableDirector aDirector)
     {
