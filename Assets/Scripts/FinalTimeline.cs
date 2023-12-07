@@ -55,12 +55,6 @@ public class FinalTimeline : MonoBehaviour
         currentDirector.stopped += OnPlayableDirectorStopped;
         currentDirector.Play();
     }
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.R))
-            StartTimeline(Progress.Instance.playerInfo.choosenCharacterNumber);
-    }
 
     void OnDisable()
     {
