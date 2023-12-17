@@ -60,7 +60,8 @@ namespace MenteBacata.ScivoloCharacterControllerDemo
         private void Start()
         {
             cameraTransform = Camera.main.transform;
-            mover.canClimbSteepSlope = true;         
+            mover.canClimbSteepSlope = true;
+            SetCurrentCharacterAnimator();
         }
 
         private void Update()

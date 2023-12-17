@@ -56,12 +56,9 @@ public class NavigationController : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab)) 
+        if (Input.GetKeyDown(KeyCode.Tab) && isGame)
         {
-            if (!isPause)
-            {
-                ShowPauseMenu();
-            }
+            ShowPauseMenu();
         }
     }
 
@@ -70,7 +67,7 @@ public class NavigationController : MonoBehaviour
         ToggleMenu_Ingame();
         spawnManager.SetGamemodeType(Gamemode.normal);
         speedRunLevelController.SetupSpeedRun(false);
-        spawnManager.ResetSpeedrunSpawnpoints();
+        spawnManager.ResetSpeedrunSpawnpoints();       
         spawnManager.RespawnPlayer();
     }
     public void StartSpeedrunGamemode()
@@ -86,10 +83,11 @@ public class NavigationController : MonoBehaviour
     public void ToggleMenu_Ingame()
     {
         isGame = !isGame;
+        Time.timeScale = 1;
         if (!isGame)
             speedRunLevelController.CancelSpeedRun();
         inputGame.ShowCursorState(!isGame);
-        swapCharacter.MakeCurrentCharacterModelActive();
+        swapCharacter.MakeCurrentCharacterModelActive();  
         EnableCharacterControl(isGame);
         isPause = false;
         pauseMenu.SetActive(isPause);
@@ -116,17 +114,21 @@ public class NavigationController : MonoBehaviour
     }
     public void ShowPauseMenu()
     {
+        if (deathMenu.activeSelf)
+        {
+            return;
+        }
         soundController.MakeClickSound();
         isPause = !isPause;       
+        Time.timeScale = isPause ? 0 : 1;
         pauseMenu.SetActive(isPause);
         pauseButton.SetActive(!isPause);
         speedRunLevelController.ToggleSpeedRunTimer(isPause);
-        if (!deathMenu.activeSelf)
-        {
-            EnableCharacterControl(!isPause);
-            inputGame.ShowCursorState(isPause);
-        }    
+        EnableCharacterControl(!isPause);
+        inputGame.ShowCursorState(isPause); 
     }
+
+
     public void EnableCharacterControl(bool state)
     {
         mainCamera.GetComponent<OrbitingCamera>().enabled = state;
@@ -148,6 +150,7 @@ public class NavigationController : MonoBehaviour
 
     public void ShowEndGamePanel(bool state)
     {
+        
         endGamePanel.SetActive(state);
         EnableCharacterControl(!state);
         inputGame.ShowCursorState(state);

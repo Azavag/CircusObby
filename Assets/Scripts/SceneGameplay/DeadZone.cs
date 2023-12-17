@@ -6,27 +6,24 @@ using UnityEngine;
 public class DeadZone : MonoBehaviour
 {
     SpawnManager spawnManager;
-    [SerializeField] SoundController soundController;
+    SoundController soundController;
     SimpleCharacterController characterController;
     // Start is called before the first frame update
     void Start()
     {
         spawnManager = FindObjectOfType<SpawnManager>();
-        soundController = FindObjectOfType<SoundController>();
-        characterController = FindObjectOfType<SimpleCharacterController>();
-
-
+        soundController = FindObjectOfType<SoundController>();       
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
+        {            
+            characterController = FindObjectOfType<SimpleCharacterController>();
             soundController.Play("Death");
             characterController.isDead = true;
             StartCoroutine(spawnManager.DeathProccess());
-
         }
     }
 }

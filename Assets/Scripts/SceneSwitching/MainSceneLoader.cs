@@ -9,7 +9,7 @@ public class MainSceneLoader : MonoBehaviour
     private void Awake()
     {
         level.SetActive(false);
-        player.SetActive(false);
+        //player.SetActive(false);
         canvases.SetActive(false);
         controllers.SetActive(false);
         progressLoadedChecker = FindObjectOfType<ProgressLoadedChecker>();
@@ -29,7 +29,7 @@ public class MainSceneLoader : MonoBehaviour
     {
         controllers.SetActive(true);
         canvases.SetActive(true);
-        level.SetActive(true);
+        level.SetActive(true);       
         isSceneLoaded = true;
     }
   

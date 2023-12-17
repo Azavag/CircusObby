@@ -7702,7 +7702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &184517615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10414,7 +10413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &250971378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12984,7 +12982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &337158786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18086,7 +18083,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!4 &416331327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2284695262716675685, guid: 03388cc98fb404e4a9f1c8767d8b3d87,
@@ -19644,7 +19640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &462664774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20961,7 +20956,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1 &483414039
 GameObject:
   m_ObjectHideFlags: 0
@@ -27838,7 +27832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &630677208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28118,7 +28111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1 &637519941
 GameObject:
   m_ObjectHideFlags: 0
@@ -31529,7 +31521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &674259012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35691,7 +35682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &786699493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35804,6 +35794,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 921348473}
     m_Modifications:
+    - target: {fileID: 653675253550894840, guid: e955e27cd28d57d48acc2c55322c99d5,
+        type: 3}
+      propertyPath: characterController
+      value: 
+      objectReference: {fileID: 1941739466}
     - target: {fileID: 1316042769910909777, guid: e955e27cd28d57d48acc2c55322c99d5,
         type: 3}
       propertyPath: m_Name
@@ -36719,7 +36714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!114 &800987856 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4578408239466935427, guid: 03388cc98fb404e4a9f1c8767d8b3d87,
@@ -46006,6 +46000,7 @@ GameObject:
   - component: {fileID: 1020414690}
   - component: {fileID: 1020414689}
   - component: {fileID: 1020414691}
+  - component: {fileID: 1020414692}
   m_Layer: 0
   m_Name: NavigationController
   m_TagString: Untagged
@@ -46031,7 +46026,7 @@ MonoBehaviour:
   mainPanel: {fileID: 516117476}
   gamemmodesPanel: {fileID: 1750880532}
   pauseMenu: {fileID: 115283219}
-  deathMenu: {fileID: 797500251}
+  deathMenu: {fileID: 872915674}
   endGamePanel: {fileID: 351040551}
   mainCamera: {fileID: 2106391483}
   playerObject: {fileID: 1941739459}
@@ -46073,6 +46068,19 @@ MonoBehaviour:
   bestTimeText: {fileID: 772837387}
   normalGamemmodeHintObject: {fileID: 1307248475}
   speedrunGamemmodeHintObject: {fileID: 387478897}
+--- !u!114 &1020414692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020414688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9946d6efad4658d4fab73b0af13fe59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navigationController: {fileID: 1020414689}
 --- !u!1001 &1021798622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50596,7 +50604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &1155481725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51215,7 +51222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1 &1166431190
 GameObject:
   m_ObjectHideFlags: 0
@@ -56628,7 +56634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1 &1264335314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4262672409081879813, guid: d189ac5499d983e40aba50d60f8ff656,
@@ -56647,7 +56652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1 &1264914502
 GameObject:
   m_ObjectHideFlags: 0
@@ -59142,7 +59146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!95 &1319431205 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c7f57ec8739b37048b405101777dabdc,
@@ -74952,7 +74955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1 &1778194193
 GameObject:
   m_ObjectHideFlags: 0
@@ -76191,7 +76193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!65 &1803054475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80155,7 +80156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!114 &1921220187 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4578408239466935427, guid: 03388cc98fb404e4a9f1c8767d8b3d87,
@@ -84784,7 +84784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1 &2044471349
 GameObject:
   m_ObjectHideFlags: 0
@@ -88910,7 +88909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!114 &653675255530769325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88923,7 +88921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!1001 &687121107123633602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90272,7 +90269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374fd063f0848d4cb43934af34f6e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundController: {fileID: 0}
 --- !u!4 &3602185168608764205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4467928184970575388, guid: 3fe0f16fcd35c8f49beef92597f3e103,

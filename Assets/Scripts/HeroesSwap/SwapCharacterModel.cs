@@ -8,6 +8,7 @@ public class SwapCharacterModel : MonoBehaviour
     [SerializeField] GameObject[] characterModels;
     [SerializeField] SimpleCharacterController simpleCharacterController;
 
+
     public void MakeCurrentCharacterModelActive()
     {
         foreach (GameObject characterModel in characterModels)
